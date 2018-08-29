@@ -34,7 +34,7 @@ class RandomCrop(object):
                 'reflection', image, top, bottom, left, right)
         w, h = image.size
         if w == tw and h == th:
-            return (image, label, *args)
+            return (image, label)
 
         x1 = random.randint(0, w - tw)
         y1 = random.randint(0, h - th)
@@ -204,7 +204,7 @@ class Pad(object):
                 'constant', image,
                 self.padding, self.padding, self.padding, self.padding,
                 value=self.fill)
-        return (image, label, *args)
+        return (image, label)
 
 
 class PadImage(object):
@@ -222,7 +222,7 @@ class PadImage(object):
                 self.padding, self.padding, self.padding, self.padding)
         else:
             image = ImageOps.expand(image, border=self.padding, fill=self.fill)
-        return (image, label, *args)
+        return (image, label)
 
 
 class ToTensor(object):
