@@ -4,7 +4,7 @@ import numpy as np
 
 import torch
 from torch.autograd import Function
-from dense import batch_norm
+from .dense import batch_norm
 
 from queue import Queue
 from threading import Condition

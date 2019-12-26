@@ -23,11 +23,11 @@ import torch.optim as optim
 from torchvision import datasets, transforms
 from torch.autograd import Variable
 
-import drn
-import data_transforms as transforms
+from . import drn
+from . import data_transforms as transforms
 
 try:
-    from modules import batchnormsync
+    from .modules import batchnormsync
 except ImportError:
     pass
 
