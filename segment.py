@@ -88,7 +88,7 @@ class DRNSeg(nn.Module):
         self.base = nn.Sequential(*list(model.children())[:-2])
 
         self.seg = nn.Conv2d(model.out_dim, classes, kernel_size=1, bias=True)
-        self.softmax = nn.LogSoftmax()
+        self.softmax = nn.LogSoftmax(dim=0)
         m = self.seg
         n = m.kernel_size[0] * m.kernel_size[1] * m.out_channels
         m.weight.data.normal_(0, math.sqrt(2. / n))
@@ -220,7 +220,7 @@ def validate(val_loader, model, criterion, eval_score=None, print_freq=10):
         ]:
             target = target.float()
         input = input.cuda()
-        target = target.cuda(async=True)
+        target = target.cuda(non_blocking=True)
         input_var = torch.autograd.Variable(input, volatile=True)
         target_var = torch.autograd.Variable(target, volatile=True)
 
@@ -312,7 +312,7 @@ def train(train_loader,
             target = target.float()
 
         input = input.cuda()
-        target = target.cuda(async=True)
+        target = target.cuda(non_blocking=True)
         input_var = torch.autograd.Variable(input)
         target_var = torch.autograd.Variable(target)
 
